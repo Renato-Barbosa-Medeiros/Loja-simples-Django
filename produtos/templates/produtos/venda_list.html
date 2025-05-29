@@ -1,0 +1,36 @@
+{% extends 'produtos/base.html' %}
+
+{% block content %}
+<h2>Lista de Vendas</h2>
+
+<form method="get">
+    <select name="cliente">
+        <option value="">Todos os clientes</option>
+        {% for cliente in clientes %}
+        <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+        {% endfor %}
+    </select>
+    De: <input type="date" name="data_ini">
+    Até: <input type="date" name="data_fim">
+    <button type="submit">Filtrar</button>
+</form>
+<p><a href="{% url 'cria_venda' %}">Nova Venda</a></p>
+<table>
+    <tr>
+        <th>Cliente</th><th>Produto</th><th>Qtd</th><th>Data</th><th>Total</th><th>Ações</th>
+    </tr>
+    {% for venda in vendas %}
+    <tr>
+        <td>{{ venda.cliente.nome }}</td>
+        <td>{{ venda.produto.nome }}</td>
+        <td>{{ venda.quantidade }}</td>
+        <td>{{ venda.data_venda }}</td>
+        <td>R$ {{ venda.valor_total|floatformat:2 }}</td>
+        <td>
+            <a href="{% url 'edita_venda' venda.pk %}">Editar</a> |
+            <a href="{% url 'remove_venda' venda.pk %}">Remover</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
