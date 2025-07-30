@@ -1,4 +1,4 @@
-No terminal:
-(Windows): venv\Scripts\activate
-pip install django
+No terminal: 
+(Windows): pip install django 
+venv\Scripts\activate  
 python manage.py runserver
